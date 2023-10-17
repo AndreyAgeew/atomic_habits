@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from habit.models import Habit
-from habit.validators import validate_related_habit
+from habit.validators import validate_related_habit, validate_estimated_time
 
 
 class HabitSerializer(serializers.ModelSerializer):
@@ -18,4 +18,6 @@ class HabitSerializer(serializers.ModelSerializer):
         Валидаторы для модели Habit.
         """
         validate_related_habit(data)
+        validate_estimated_time(data)
+
 

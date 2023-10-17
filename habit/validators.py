@@ -9,4 +9,11 @@ def validate_related_habit(value):
         raise serializers.ValidationError("You can't choose both a related habit and a reward.")
 
 
+def validate_estimated_time(value):
+    """
+    Валидатор: Время выполнения должно быть не больше 120 секунд.
+    """
+    if value.estimated_time > 120:
+        raise serializers.ValidationError("Estimated time should not exceed 120 seconds.")
+
 
