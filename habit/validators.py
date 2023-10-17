@@ -25,4 +25,9 @@ def validate_rewarding_habit(value):
         raise serializers.ValidationError("A rewarding habit should not have a reward or a related habit.")
 
 
-
+def validate_frequency(value):
+    """
+    Валидатор: Нельзя выполнять привычку реже, чем 1 раз в 7 дней.
+    """
+    if value.frequency != 'daily':
+        raise serializers.ValidationError("The minimum frequency is once in 7 days for non-daily habits.")
