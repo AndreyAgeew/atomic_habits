@@ -3,6 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from permissions import IsOwnerOrReadOnly
 from .models import Habit
+from .paginations import HabitPagination
 from .serializers import HabitSerializer
 
 
@@ -12,6 +13,7 @@ class HabitListCreateView(generics.ListCreateAPIView):
     """
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    pagination_class = HabitPagination
 
     def get_queryset(self):
         # Возвращаем только привычки текущего пользователя
