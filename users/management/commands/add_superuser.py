@@ -15,7 +15,7 @@ class Command(BaseCommand):
         Attributes:
             help (str): Описание команды для вывода при запуске `python manage.py help`.
     """
-    help = 'Reset and add sample payment data to the Payment model'
+    help = 'Create superuser'
 
     def handle(self, *args, **kwargs):
         User.objects.all().delete()
