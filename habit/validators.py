@@ -17,3 +17,12 @@ def validate_estimated_time(value):
         raise serializers.ValidationError("Estimated time should not exceed 120 seconds.")
 
 
+def validate_rewarding_habit(value):
+    """
+    Валидатор: У приятной привычки не может быть вознаграждения или связанной привычки.
+    """
+    if value.is_reward and (value.reward or value.related_habit):
+        raise serializers.ValidationError("A rewarding habit should not have a reward or a related habit.")
+
+
+
