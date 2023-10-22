@@ -29,5 +29,5 @@ def validate_frequency(value):
     """
     Валидатор: Нельзя выполнять привычку реже, чем 1 раз в 7 дней.
     """
-    if value.get('frequency') != 'daily':
+    if value.get('frequency') not in ['daily', 'weekly']:
         raise serializers.ValidationError("The minimum frequency is once in 7 days for non-daily habits.")
