@@ -10,6 +10,7 @@ class Habit(models.Model):
     Поля:
     - user (ForeignKey): Пользователь, создавший привычку.
     - place (CharField): Место, в котором необходимо выполнять привычку.
+    - notification_time (CharField): Уведомление до начала привычки.
     - time (TimeField): Время, когда необходимо выполнять привычку.
     - action (CharField): Действие, которое представляет из себя привычку.
     - is_reward (BooleanField): Признак приятной привычки.
@@ -18,24 +19,36 @@ class Habit(models.Model):
     - reward (CharField): Вознаграждение за выполнение привычки.
     - estimated_time (IntegerField): Время, которое предположительно потратит пользователь на выполнение привычки.
     - is_public (BooleanField): Признак публичности привычки.
+    - date_of_creation (DateField): Дата создания привычки (нужно для еженедельного уведомления)
     """
+    NOTIFICATION_CHOICES = [
+        ('fifteen', 'За 15 минут'),
+        ('thirty', 'За 30 минут'),
+        ('hour', 'За час'),
+        ('two_hours', 'За 2 часа'),
+        ('day', 'За 24 часа'),
+
+    ]
     FREQUENCY_CHOICES = [
         ('daily', 'Ежедневная'),
         ('weekly', 'Еженедельная'),
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     place = models.CharField(max_length=255, help_text="Место, в котором необходимо выполнять привычку.")
+    notification_time = models.CharField(max_length=20, choices=NOTIFICATION_CHOICES, default='thirty',
+                                         help_text="За сколько присылать уведомления до начала привычки")
     time = models.TimeField(help_text="Время, когда необходимо выполнять привычку.")
     action = models.CharField(max_length=255, help_text="Действие, которое представляет из себя привычку.")
     is_reward = models.BooleanField(default=False, help_text="Признак приятной привычки.")
     related_habit = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,
                                       help_text="Связанная привычка, если таковая имеется.")
-    frequency = models.CharField(max_length=255, choices=FREQUENCY_CHOICES, default='daily',
+    frequency = models.CharField(max_length=20, choices=FREQUENCY_CHOICES, default='daily',
                                  help_text="Периодичность выполнения привычки для напоминания в днях.")
     reward = models.CharField(max_length=255, help_text="Вознаграждение за выполнение привычки.")
     estimated_time = models.IntegerField(
         help_text="Время, которое предположительно потратит пользователь на выполнение привычки.")
     is_public = models.BooleanField(default=False, help_text="Признак публичности привычки.")
+    date_of_creation = models.DateField(auto_now_add=True)
 
     def get_message(self):
         """
