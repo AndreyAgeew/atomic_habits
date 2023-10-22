@@ -36,3 +36,25 @@ class Habit(models.Model):
     estimated_time = models.IntegerField(
         help_text="Время, которое предположительно потратит пользователь на выполнение привычки.")
     is_public = models.BooleanField(default=False, help_text="Признак публичности привычки.")
+
+    def get_message(self):
+        """
+        Возвращает сообщение, описывающее привычку.
+
+        Если привычка является приятной (is_reward=True), сообщение включает информацию о действии, времени, месте,
+        вознаграждении и, если есть, связанной привычке. В противном случае, сообщение содержит только информацию о
+        действии, времени и месте выполнения привычки.
+
+        Returns:
+            str: Сообщение о привычке.
+        """
+        if self.is_reward:
+            message = f'Я буду {self.action} в {self.time}, в {self.place}.\n' \
+                      f'Мне дается на это {self.estimated_time} секунд.\n'
+            if self.related_habit:
+                message += self.related_habit.get_message()
+        else:
+            message = f'Я буду {self.action} в {self.time}, в {self.place}.\n' \
+                      f'Мне дается на это {self.estimated_time} секунд.\n'
+
+        return message
