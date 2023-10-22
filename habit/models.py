@@ -19,6 +19,10 @@ class Habit(models.Model):
     - estimated_time (IntegerField): Время, которое предположительно потратит пользователь на выполнение привычки.
     - is_public (BooleanField): Признак публичности привычки.
     """
+    FREQUENCY_CHOICES = [
+        ('daily', 'Ежедневная'),
+        ('weekly', 'Еженедельная'),
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     place = models.CharField(max_length=255, help_text="Место, в котором необходимо выполнять привычку.")
     time = models.TimeField(help_text="Время, когда необходимо выполнять привычку.")
@@ -26,7 +30,7 @@ class Habit(models.Model):
     is_reward = models.BooleanField(default=False, help_text="Признак приятной привычки.")
     related_habit = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,
                                       help_text="Связанная привычка, если таковая имеется.")
-    frequency = models.CharField(max_length=255, default='daily',
+    frequency = models.CharField(max_length=255, choices=FREQUENCY_CHOICES, default='daily',
                                  help_text="Периодичность выполнения привычки для напоминания в днях.")
     reward = models.CharField(max_length=255, help_text="Вознаграждение за выполнение привычки.")
     estimated_time = models.IntegerField(
