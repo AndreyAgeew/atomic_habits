@@ -22,4 +22,4 @@ class HabitSerializer(serializers.ModelSerializer):
         validate_estimated_time(data)
         validate_rewarding_habit(data)
         validate_frequency(data)
-
+        return data
