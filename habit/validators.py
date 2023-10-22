@@ -31,3 +31,11 @@ def validate_frequency(value):
     """
     if value.get('frequency') not in ['daily', 'weekly']:
         raise serializers.ValidationError("The minimum frequency is once in 7 days for non-daily habits.")
+
+
+def validate_notification_time(value):
+    """
+    Валидатор: Нельзя ставить увидомление за 24 часа если привычка ежедневная.
+    """
+    if value.get('notification_time') == 'weekly':
+        raise serializers.ValidationError('24 hours is only enough for a weekly habit')
