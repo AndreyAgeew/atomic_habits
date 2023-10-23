@@ -35,3 +35,9 @@ class HabitDetailView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         # Возвращаем только привычки текущего пользователя
         return Habit.objects.filter(user=self.request.user)
+
+
+class PublicHabitListView(generics.ListAPIView):
+    queryset = Habit.objects.filter(is_public=True)
+    serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated]
