@@ -33,6 +33,10 @@ class Habit(models.Model):
         ('daily', 'Ежедневная'),
         ('weekly', 'Еженедельная'),
     ]
+    WEEKDAY_CHOICES = [
+        ('today', 'Сегодня'),
+        ('tomorrow', 'Завтра'),
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     place = models.CharField(max_length=255, help_text="Место, в котором необходимо выполнять привычку.")
     notification_time = models.CharField(max_length=20, choices=NOTIFICATION_CHOICES, default='thirty',
@@ -44,6 +48,8 @@ class Habit(models.Model):
                                       help_text="Связанная привычка, если таковая имеется.")
     frequency = models.CharField(max_length=20, choices=FREQUENCY_CHOICES, default='daily',
                                  help_text="Периодичность выполнения привычки для напоминания в днях.")
+    weekday = models.CharField(max_length=20, choices=WEEKDAY_CHOICES, default='today',
+                               help_text="Периодичность выполнения привычки для напоминания в днях.")
     reward = models.CharField(max_length=255, help_text="Вознаграждение за выполнение привычки.")
     estimated_time = models.IntegerField(
         help_text="Время, которое предположительно потратит пользователь на выполнение привычки.")
