@@ -1,3 +1,4 @@
+from django.utils.timezone import now
 from rest_framework import serializers
 
 
@@ -46,6 +47,6 @@ def validate_weekday(value):
     Валидатор: Нельзя ставить старт привычки на сегодня если идет не состыковка по времени.
     """
     time = value['time']
-    date_of_creation = value['date_of_creation']
-    if time.hours() <= (date_of_creation.hours() - 4):
+    date_of_creation = now()
+    if time.hour <= (date_of_creation.hour + 8):
         raise serializers.ValidationError("You can't assign a habit for today")
