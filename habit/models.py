@@ -51,7 +51,7 @@ class Habit(models.Model):
                                  help_text="Периодичность выполнения привычки для напоминания в днях.")
     weekday = models.CharField(max_length=20, choices=WEEKDAY_CHOICES, default='today',
                                help_text="Старт выполнения привычки.")
-    reward = models.CharField(max_length=255, help_text="Вознаграждение за выполнение привычки.")
+    reward = models.CharField(max_length=255, blank=True, help_text="Вознаграждение за выполнение привычки.")
     estimated_time = models.IntegerField(
         help_text="Время, которое предположительно потратит пользователь на выполнение привычки.")
     is_public = models.BooleanField(default=False, help_text="Признак публичности привычки.")
