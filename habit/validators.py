@@ -39,3 +39,13 @@ def validate_notification_time(value):
     """
     if value.get('notification_time') == 'day' and value.get('frequency') != 'weekly':
         raise serializers.ValidationError('24 hours is only enough for a weekly habit')
+
+
+def validate_weekday(value):
+    """
+    Валидатор: Нельзя ставить старт привычки на сегодня если идет не состыковка по времени.
+    """
+    time = value['time']
+    date_of_creation = value['date_of_creation']
+    if time.hours() <= (date_of_creation.hours() - 4):
+        raise serializers.ValidationError("You can't assign a habit for today")
