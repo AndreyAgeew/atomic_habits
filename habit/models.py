@@ -86,7 +86,7 @@ class Habit(models.Model):
         Returns:
             str: Сообщение о привычке.
         """
-        if self.is_reward:
+        if not self.is_reward:
             message = f'Я буду {self.action} в {self.time}, в {self.place}.\n' \
                       f'Мне дается на это {self.estimated_time} секунд.\n'
             if self.related_habit:
