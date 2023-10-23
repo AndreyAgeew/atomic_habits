@@ -37,5 +37,5 @@ def validate_notification_time(value):
     """
     Валидатор: Нельзя ставить увидомление за 24 часа если привычка ежедневная.
     """
-    if value.get('notification_time') == 'weekly':
+    if value.get('notification_time') == 'day' and value.get('frequency') != 'weekly':
         raise serializers.ValidationError('24 hours is only enough for a weekly habit')
