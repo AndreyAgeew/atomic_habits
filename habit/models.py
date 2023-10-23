@@ -58,7 +58,22 @@ class Habit(models.Model):
     date_of_creation = models.DateField(auto_now_add=True)
 
     def __repr__(self):
+        """
+        Возвращает строковое представление объекта привычки.
+
+        Returns:
+            str: Строковое представление объекта привычки.
+        """
         return f"Habit{self.time, self.related_habit, self.frequency, self.weekday, self.date_of_creation}"
+
+    def __str__(self):
+        """
+        Возвращает строку, описывающую привычку.
+
+        Returns:
+            str: Строка с описанием привычки.
+        """
+        return f'Я буду {self.action} в {self.time}, в {self.place}'
 
     def get_message(self):
         """
