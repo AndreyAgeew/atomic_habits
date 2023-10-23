@@ -20,7 +20,7 @@ class Habit(models.Model):
     - reward (CharField): Вознаграждение за выполнение привычки.
     - estimated_time (IntegerField): Время, которое предположительно потратит пользователь на выполнение привычки.
     - is_public (BooleanField): Признак публичности привычки.
-    - date_of_creation (DateField): Дата создания привычки (нужно для еженедельного уведомления)
+    - date_of_start (DateField): Дата создания привычки и потом старта (нужно для еженедельного уведомления)
     - is_starting (BooleanField): Признак начала рассылки привычки, началась или нет в основ нужна для еженедельной.
     """
     NOTIFICATION_CHOICES = [
@@ -56,7 +56,7 @@ class Habit(models.Model):
     estimated_time = models.IntegerField(
         help_text="Время, которое предположительно потратит пользователь на выполнение привычки.")
     is_public = models.BooleanField(default=False, help_text="Признак публичности привычки.")
-    date_of_creation = models.DateField(auto_now_add=True)
+    date_of_start = models.DateField(auto_now_add=True)
     is_starting = models.BooleanField(default=False)
 
     def __repr__(self):
@@ -66,7 +66,7 @@ class Habit(models.Model):
         Returns:
             str: Строковое представление объекта привычки.
         """
-        return f"Habit{self.time, self.related_habit, self.frequency, self.weekday, self.date_of_creation}"
+        return f"Habit{self.time, self.related_habit, self.frequency, self.weekday, self.date_of_start}"
 
     def __str__(self):
         """
