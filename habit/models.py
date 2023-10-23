@@ -16,6 +16,7 @@ class Habit(models.Model):
     - is_reward (BooleanField): Признак приятной привычки.
     - related_habit (ForeignKey): Связанная привычка, если таковая имеется.
     - frequency (CharField): Периодичность выполнения привычки для напоминания в днях.
+    - weekday (CharField): Старт выполнения привычки.
     - reward (CharField): Вознаграждение за выполнение привычки.
     - estimated_time (IntegerField): Время, которое предположительно потратит пользователь на выполнение привычки.
     - is_public (BooleanField): Признак публичности привычки.
@@ -49,7 +50,7 @@ class Habit(models.Model):
     frequency = models.CharField(max_length=20, choices=FREQUENCY_CHOICES, default='daily',
                                  help_text="Периодичность выполнения привычки для напоминания в днях.")
     weekday = models.CharField(max_length=20, choices=WEEKDAY_CHOICES, default='today',
-                               help_text="Периодичность выполнения привычки для напоминания в днях.")
+                               help_text="Старт выполнения привычки.")
     reward = models.CharField(max_length=255, help_text="Вознаграждение за выполнение привычки.")
     estimated_time = models.IntegerField(
         help_text="Время, которое предположительно потратит пользователь на выполнение привычки.")
