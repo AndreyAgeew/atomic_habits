@@ -57,6 +57,9 @@ class Habit(models.Model):
     is_public = models.BooleanField(default=False, help_text="Признак публичности привычки.")
     date_of_creation = models.DateField(auto_now_add=True)
 
+    def __repr__(self):
+        return f"Habit{self.time, self.related_habit, self.frequency, self.weekday, self.date_of_creation}"
+
     def get_message(self):
         """
         Возвращает сообщение, описывающее привычку.
