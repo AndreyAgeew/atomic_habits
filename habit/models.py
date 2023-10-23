@@ -21,6 +21,7 @@ class Habit(models.Model):
     - estimated_time (IntegerField): Время, которое предположительно потратит пользователь на выполнение привычки.
     - is_public (BooleanField): Признак публичности привычки.
     - date_of_creation (DateField): Дата создания привычки (нужно для еженедельного уведомления)
+    - is_starting (BooleanField): Признак начала рассылки привычки, началась или нет в основ нужна для еженедельной.
     """
     NOTIFICATION_CHOICES = [
         ('fifteen', 'За 15 минут'),
@@ -56,6 +57,7 @@ class Habit(models.Model):
         help_text="Время, которое предположительно потратит пользователь на выполнение привычки.")
     is_public = models.BooleanField(default=False, help_text="Признак публичности привычки.")
     date_of_creation = models.DateField(auto_now_add=True)
+    is_starting = models.BooleanField(default=False)
 
     def __repr__(self):
         """
