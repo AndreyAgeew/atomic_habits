@@ -48,5 +48,5 @@ def validate_weekday(value):
     """
     time = value['time']
     date_of_creation = now()
-    if time.hour <= (date_of_creation.hour + 8):
+    if value.get('weekday') == 'today' and time.hour <= (date_of_creation.hour + 8):
         raise serializers.ValidationError("You can't assign a habit for today")
