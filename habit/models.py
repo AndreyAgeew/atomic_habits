@@ -22,8 +22,9 @@ class Habit(models.Model):
     - is_public (BooleanField): Признак публичности привычки.
     - date_of_start (DateField): Дата создания привычки и потом старта (нужно для еженедельного уведомления)
     - is_starting (BooleanField): Признак начала рассылки привычки, началась или нет в основ нужна для еженедельной.
+    - notification (CharField): Тип уведомления телеграм/почта
     """
-    NOTIFICATION_CHOICES = [
+    NOTIFICATION_TIME_CHOICES = [
         ('fifteen', 'За 15 минут'),
         ('thirty', 'За 30 минут'),
         ('hour', 'За час'),
@@ -39,9 +40,13 @@ class Habit(models.Model):
         ('today', 'Сегодня'),
         ('tomorrow', 'Завтра'),
     ]
+    NOTIFICATION_CHOICES = [
+        ('telegram', 'Телеграм'),
+        ('email', 'Почта'),
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     place = models.CharField(max_length=255, help_text="Место, в котором необходимо выполнять привычку.")
-    notification_time = models.CharField(max_length=20, choices=NOTIFICATION_CHOICES, default='thirty',
+    notification_time = models.CharField(max_length=20, choices=NOTIFICATION_TIME_CHOICES, default='thirty',
                                          help_text="За сколько присылать уведомления до начала привычки")
     time = models.TimeField(help_text="Время, когда необходимо выполнять привычку.")
     action = models.CharField(max_length=255, help_text="Действие, которое представляет из себя привычку.")
@@ -58,6 +63,8 @@ class Habit(models.Model):
     is_public = models.BooleanField(default=False, help_text="Признак публичности привычки.")
     date_of_start = models.DateField(auto_now_add=True)
     is_starting = models.BooleanField(default=False)
+    notification = models.CharField(max_length=20, choices=FREQUENCY_CHOICES, default='telegram',
+                                    help_text="Тип оповощения telegram/email.")
 
     def __repr__(self):
         """
