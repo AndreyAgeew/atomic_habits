@@ -21,7 +21,7 @@ def send_message():
     current_time = datetime.now().time()
     current_day = datetime.now().day
 
-    # Получаем все привычки, исключая связанные привычки
+    # Получаем все привычки
     habits = Habit.objects.all()
 
     for habit in habits:
