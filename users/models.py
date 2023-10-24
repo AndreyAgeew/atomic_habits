@@ -14,12 +14,14 @@ class User(AbstractUser):
             avatar (ImageField): Изображение профиля пользователя.
             phone (str): Номер телефона пользователя.
             country (str): Страна, в которой проживает пользователь.
+            chat_id(int): Id чата в tg
     """
     username = None
     email = models.EmailField(unique=True, verbose_name='Почта')
     avatar = models.ImageField(upload_to='users/', null=True, blank=True, verbose_name='Аватар')
     phone = models.CharField(max_length=35, verbose_name='Телефон')
     country = models.CharField(max_length=35, verbose_name='Страна')
+    chat_id = models.PositiveIntegerField(default=0, verbose_name='ID чат в tg')
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
