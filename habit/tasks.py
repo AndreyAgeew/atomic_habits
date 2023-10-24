@@ -11,7 +11,7 @@ from habit.services import _check_starting, _get_mailing_time, _check_frequency_
 
 
 @shared_task
-def send__message():
+def send_message():
     """
     Отправляет уведомления о привычках, которые нужно выполнить сегодня.
 
