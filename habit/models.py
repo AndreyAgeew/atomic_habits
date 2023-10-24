@@ -63,7 +63,7 @@ class Habit(models.Model):
     is_public = models.BooleanField(default=False, help_text="Признак публичности привычки.")
     date_of_start = models.DateField(auto_now_add=True)
     is_starting = models.BooleanField(default=False)
-    notification = models.CharField(max_length=20, choices=FREQUENCY_CHOICES, default='telegram',
+    notification = models.CharField(max_length=20, choices=NOTIFICATION_CHOICES, default='telegram',
                                     help_text="Тип оповощения telegram/email.")
 
     def __repr__(self):
