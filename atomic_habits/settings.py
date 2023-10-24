@@ -191,7 +191,7 @@ CELERY_TIMEZONE = 'Europe/Moscow'
 # Настройки для Celery
 CELERY_BEAT_SCHEDULE = {
     'task-name': {
-        'task': 'habit.tasks.send_mailing_message',  # Путь к задаче
+        'task': 'habit.tasks.send_message',  # Путь к задаче
         'schedule': timedelta(seconds=10),  # Расписание выполнения задачи (например, каждые 10 минут)
     },
 }
