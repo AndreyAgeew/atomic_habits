@@ -26,7 +26,8 @@ class Command(BaseCommand):
             last_name='AH',
             is_staff=True,
             is_superuser=True,
-            chat_id=os.getenv('CHAT_ID_ADMIN')
+            chat_id=os.getenv('CHAT_ID_ADMIN'),
+            is_active=True,
         )
         super_user.set_password(os.getenv('ADMIN_PASSWORD'))
         super_user.save()
